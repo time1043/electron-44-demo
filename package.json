@@ -2,8 +2,9 @@
   "name": "electron-demo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,5 +18,8 @@
     }
   },
   "packageManager": "pnpm@12.11.2",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "electron": "^44.7.0"
+  }
 }
