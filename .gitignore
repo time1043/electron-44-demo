@@ -1,6 +1,6 @@
-# for macos
+node_modules
+dist
+out
 .DS_Store
-
-# for nodejs
-node_modules/
-dist/
+.eslintcache
+*.log*
