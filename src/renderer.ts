@@ -12,6 +12,7 @@
  * https://electronjs.org/docs/tutorial/security
  */
 
+import './app';
 import './index.css';
 
 console.log(
