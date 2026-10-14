@@ -21,6 +21,9 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@analogjs/vite-plugin-angular": "^2.8.0",
+    "@angular/build": "^22.2.2",
+    "@angular/compiler": "^22.2.2",
     "@electron-forge/cli": "^8.0.1",
     "@electron-forge/maker-deb": "^8.0.1",
     "@electron-forge/maker-rpm": "^8.0.1",
@@ -38,6 +41,11 @@
     "vite": "^8.3.4"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.1"
+    "@angular/common": "^22.2.2",
+    "@angular/core": "^22.2.2",
+    "@angular/platform-browser": "^22.2.2",
+    "electron-squirrel-startup": "^1.0.1",
+    "rxjs": "^7.8.2",
+    "tslib": "^2.8.1"
   }
 }

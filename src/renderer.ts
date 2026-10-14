@@ -12,8 +12,8 @@
  * https://electronjs.org/docs/tutorial/security
  */
 
+import { bootstrapApplication } from '@angular/platform-browser';
+import { App } from './app/app';
 import './index.css';
 
-console.log(
-  '👋 This message is being logged by the renderer process, included via Vite',
-);
+bootstrapApplication(App).catch((err) => console.error(err));
