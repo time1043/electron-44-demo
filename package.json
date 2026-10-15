@@ -16,8 +16,8 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "release": "electron-forge release",
-    "lint": "oxlint && oxfmt --check",
-    "lint:fix": "oxlint --fix && oxfmt --write",
+    "lint": "oxlint && oxfmt --check && prettier --check \"src/**/*.html\"",
+    "lint:fix": "oxlint --fix && oxfmt --write && prettier --write \"src/**/*.html\"",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
@@ -37,6 +37,7 @@
     "electron": "44.7.0",
     "oxfmt": "^0.41.0",
     "oxlint": "^1.87.0",
+    "prettier": "^3.9.10",
     "typescript": "^6.0.3",
     "vite": "^8.3.4"
   },
