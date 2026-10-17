@@ -14,7 +14,8 @@
     "allowImportingTsExtensions": true,
     "paths": {
       "@/renderer/*": ["./src/renderer/*"]
-    }
+    },
+    "strictNullChecks": true
   },
   "include": ["src/**/*", "*.ts", "*.mts"]
 }
