@@ -16,6 +16,7 @@ const createWindow = () => {
       preload: path.join(__dirname, 'preload.cjs'),
     },
     show: false,
+    frame: false,
   });
 
   // and load the index.html of the app.
