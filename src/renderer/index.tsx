@@ -12,9 +12,13 @@
  * https://electronjs.org/docs/tutorial/security
  */
 
-import './app';
-import './index.css';
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import Home from "./routes/home";
+
+const root = createRoot(document.body);
+root.render(<Home />);
 
 console.log(
-  '👋 This message is being logged by the renderer process, included via Vite',
+  "👋 This message is being logged by the renderer process, included via Vite",
 );
