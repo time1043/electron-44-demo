@@ -15,6 +15,7 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.cjs'),
     },
+    show: false,
   });
 
   // and load the index.html of the app.
@@ -26,8 +27,12 @@ const createWindow = () => {
     );
   }
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+  });
+
+  // // Open the DevTools.
+  // mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
