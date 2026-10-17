@@ -1,6 +1,6 @@
 export default function Home() {
-  return <div>
-    <h1>Home</h1>
-    <p>This is the home page</p>
+  return <div className="p-2">
+    <h1 className="text-3xl text-red-400">Home</h1>
+    <p className="underline">This is the home page</p>
   </div>;
 }
