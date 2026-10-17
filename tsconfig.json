@@ -13,8 +13,8 @@
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "paths": {
-      "@/renderer/*": ["./src/renderer/*"],
-    },
+      "@/renderer/*": ["./src/renderer/*"]
+    }
   },
-  "include": ["src/**/*", "*.ts", "*.mts"],
+  "include": ["src/**/*", "*.ts", "*.mts"]
 }
