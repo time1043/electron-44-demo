@@ -10,6 +10,11 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "jsx": "react-jsx",
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "@/renderer/*": ["./src/renderer/*"],
+    },
   },
   "include": ["src/**/*", "*.ts", "*.mts"],
 }
