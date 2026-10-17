@@ -1,0 +1,45 @@
+{
+  "version": 1.1,
+  "properties": [
+    {
+      "name": "app-region",
+      "description": "Electron-specific property: 'drag' makes the region draggable, 'no-drag' excludes it.",
+      "values": [{ "name": "drag" }, { "name": "no-drag" }]
+    },
+    {
+      "name": "-webkit-app-region",
+      "description": "Electron-specific property (prefixed version): 'drag' makes the region draggable, 'no-drag' excludes it.",
+      "values": [{ "name": "drag" }, { "name": "no-drag" }]
+    }
+  ],
+  "atDirectives": [
+    {
+      "name": "@import",
+      "description": "Tailwind import"
+    },
+    {
+      "name": "@plugin",
+      "description": "Tailwind v4 plugin directive"
+    },
+    {
+      "name": "@theme",
+      "description": "Tailwind v4 theme directive"
+    },
+    {
+      "name": "@utility",
+      "description": "Tailwind v4 utility directive"
+    },
+    {
+      "name": "@variant",
+      "description": "Tailwind v4 variant directive"
+    },
+    {
+      "name": "@custom-variant",
+      "description": "Tailwind v4 custom-variant directive"
+    },
+    {
+      "name": "@apply",
+      "description": "Tailwind apply directive"
+    }
+  ]
+}
