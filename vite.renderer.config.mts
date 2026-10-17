@@ -7,6 +7,8 @@ import { alias } from './vite.alias.mts';
 
 // https://vitejs.dev/config
 export default defineConfig({
+  // Packaged app loads the bundle from file://, so asset URLs must be relative.
+  base: './',
   plugins: [
     // Please make sure that '@tanstack/router-plugin' is passed before '@vitejs/plugin-react'
     tanstackRouter({

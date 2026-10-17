@@ -12,15 +12,20 @@
  * https://electronjs.org/docs/tutorial/security
  */
 
-import { RouterProvider, createRouter } from '@tanstack/react-router';
+import {
+  RouterProvider,
+  createHashHistory,
+  createRouter,
+} from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
 import './index.css';
 import { routeTree } from './routeTree.gen';
 
-// Create a new router instance
-const router = createRouter({ routeTree });
+// Hash history works both on http:// (vite dev server) and file:// (packaged app),
+// where the History API / pushState is not available.
+const router = createRouter({ routeTree, history: createHashHistory() });
 
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
