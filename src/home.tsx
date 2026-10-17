@@ -1,3 +1,5 @@
+import { Smiley, Heart, Horse } from '@phosphor-icons/react';
+
 export default function Home() {
   return (
     <div className="p-2">
@@ -10,6 +12,12 @@ export default function Home() {
             <p>This card has aura</p>
           </div>
         </div>
+      </div>
+
+      <div>
+        <Smiley />
+        <Heart size={32} color="hotpink" weight="fill" />
+        <Horse weight="duotone" />
       </div>
     </div>
   );
