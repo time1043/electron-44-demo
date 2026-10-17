@@ -1,6 +1,10 @@
 @import 'tailwindcss';
 @plugin "daisyui";
 
-h1 {
-  -webkit-app-region: drag;
+nav {
+  app-region: drag;
+}
+
+button {
+  app-region: no-drag;
 }
