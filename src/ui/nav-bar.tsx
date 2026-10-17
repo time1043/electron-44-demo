@@ -11,13 +11,22 @@ export default function NavBar() {
         <a className="btn btn-ghost sm:text-xl text-sm">daisyUI</a>
       </div>
       <div className="flex-none">
-        <button className="btn btn-square btn-ghost sm:btn-md btn-sm">
+        <button
+          className="btn btn-square btn-ghost sm:btn-md btn-sm tooltip tooltip-bottom"
+          data-tip="Minimize"
+        >
           <MinusSquareIcon size={32} color="#fac800" />
         </button>
-        <button className="btn btn-square btn-ghost sm:btn-md btn-sm">
+        <button
+          className="btn btn-square btn-ghost sm:btn-md btn-sm tooltip tooltip-bottom"
+          data-tip="Fullscreen"
+        >
           <ResizeIcon size={32} color="#34c759" />
         </button>
-        <button className="btn btn-square btn-ghost sm:btn-md btn-sm">
+        <button
+          className="btn btn-square btn-ghost sm:btn-md btn-sm tooltip tooltip-bottom"
+          data-tip="Close"
+        >
           <XSquareIcon size={32} color="#ff5c5f" />
         </button>
       </div>

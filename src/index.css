@@ -5,6 +5,6 @@ nav {
   app-region: drag;
 }
 
-button {
+.btn {
   app-region: no-drag;
 }
