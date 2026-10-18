@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -16,9 +16,14 @@ const createWindow = () => {
   });
 
   win.loadFile("index.html");
+
+  // // Mac: Cmd + Option + I
+  // // Win: Ctrl + Shift + I
+  // win.webContents.openDevTools();
 };
 
 app.whenReady().then(() => {
+  ipcMain.handle("ping", () => "pong");
   createWindow();
 
   app.on("activate", () => {
