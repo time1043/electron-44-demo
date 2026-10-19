@@ -1,6 +1,6 @@
-import { app, BrowserWindow } from 'electron';
-import path from 'node:path';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import started from 'electron-squirrel-startup';
+import path from 'node:path';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -41,6 +41,11 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow();
+
+  ipcMain.on('window:action', (event, action) => {
+    // TODO: implement minimize, maximize, and close
+    console.log({ event, action });
+  });
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
