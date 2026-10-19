@@ -9,7 +9,7 @@
     "noImplicitAny": true,
     "sourceMap": true,
     "resolveJsonModule": true,
-    "jsx": "react-jsx",
+    "jsx": "react-jsx"
   },
-  "include": ["src/**/*", "*.ts", "*.mts"],
+  "include": ["src/**/*", "*.ts", "*.mts"]
 }
