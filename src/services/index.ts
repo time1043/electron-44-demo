@@ -7,5 +7,5 @@ import { handleWindowAction } from './window';
  * Call once after `app.whenReady()`.
  */
 export function registerIpcHandlers() {
-   ipcMain.on(WINDOW_ACTION_CHANNEL, handleWindowAction);
+  ipcMain.on(WINDOW_ACTION_CHANNEL, handleWindowAction);
 }

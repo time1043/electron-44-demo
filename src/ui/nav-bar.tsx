@@ -4,6 +4,7 @@ import {
   XSquareIcon,
 } from '@phosphor-icons/react';
 import { WindowAction } from '../types/window-action';
+import ThemeController from './theme-controller';
 
 export default function NavBar() {
   const { windowAction } = window.electronAPI;
@@ -14,6 +15,7 @@ export default function NavBar() {
         <a className="btn btn-ghost sm:text-xl text-sm">daisyUI</a>
       </div>
       <div className="flex-none">
+        <ThemeController />
         <button
           className="btn btn-square btn-ghost sm:btn-md btn-sm tooltip tooltip-bottom"
           data-tip={WindowAction.MINIMIZE}
