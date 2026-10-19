@@ -2,15 +2,18 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 import started from 'electron-squirrel-startup';
 import path from 'node:path';
 import { WINDOW_ACTION_CHANNEL } from './types/channels/window';
+import { WindowAction } from './types/window-action';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
   app.quit();
 }
 
+let mainWindow: BrowserWindow | null = null;
+
 const createWindow = () => {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -43,9 +46,19 @@ const createWindow = () => {
 app.whenReady().then(() => {
   createWindow();
 
-  ipcMain.on(WINDOW_ACTION_CHANNEL, (event, action) => {
-    // TODO: implement minimize, maximize, and close
-    console.log({ event, action });
+  ipcMain.on(WINDOW_ACTION_CHANNEL, (event, action: WindowAction) => {
+    switch (action) {
+      case WindowAction.MINIMIZE:
+        mainWindow?.minimize();
+        break;
+      case WindowAction.MAXIMIZE:
+        // mainWindow?.maximize();
+        mainWindow?.setFullScreen(!mainWindow.isFullScreen());
+        break;
+      case WindowAction.CLOSE:
+        mainWindow?.close();
+        break;
+    }
   });
 
   // On OS X it's common to re-create a window in the app when the
