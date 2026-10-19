@@ -3,6 +3,7 @@ import {
   ResizeIcon,
   XSquareIcon,
 } from '@phosphor-icons/react';
+import { WindowAction } from '../types/window-action';
 
 export default function NavBar() {
   const { windowAction } = window.electronAPI;
@@ -15,22 +16,22 @@ export default function NavBar() {
       <div className="flex-none">
         <button
           className="btn btn-square btn-ghost sm:btn-md btn-sm tooltip tooltip-bottom"
-          data-tip="Minimize"
-          onClick={() => windowAction('minimize')}
+          data-tip={WindowAction.MINIMIZE}
+          onClick={() => windowAction(WindowAction.MINIMIZE)}
         >
           <MinusSquareIcon size={32} color="#fac800" />
         </button>
         <button
           className="btn btn-square btn-ghost sm:btn-md btn-sm tooltip tooltip-bottom"
-          data-tip="Fullscreen"
-          onClick={() => windowAction('fullscreen')}
+          data-tip={WindowAction.MAXIMIZE}
+          onClick={() => windowAction(WindowAction.MAXIMIZE)}
         >
           <ResizeIcon size={32} color="#34c759" />
         </button>
         <button
           className="btn btn-square btn-ghost sm:btn-md btn-sm tooltip tooltip-bottom"
-          data-tip="Close"
-          onClick={() => windowAction('close')}
+          data-tip={WindowAction.CLOSE}
+          onClick={() => windowAction(WindowAction.CLOSE)}
         >
           <XSquareIcon size={32} color="#ff5c5f" />
         </button>

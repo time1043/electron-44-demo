@@ -3,7 +3,14 @@
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 
 import { contextBridge, ipcRenderer } from 'electron';
+import { WINDOW_ACTION_CHANNEL } from './types/channels/window';
+import { WindowAction } from './types/window-action';
 
-contextBridge.exposeInMainWorld('electronAPI', {
-  windowAction: (action: string) => ipcRenderer.send('window:action', action),
-});
+const apiKey = 'electronAPI';
+
+const api = {
+  windowAction: (action: WindowAction) =>
+    ipcRenderer.send(WINDOW_ACTION_CHANNEL, action),
+} satisfies Window[typeof apiKey];
+
+contextBridge.exposeInMainWorld(apiKey, api);

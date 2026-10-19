@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import started from 'electron-squirrel-startup';
 import path from 'node:path';
+import { WINDOW_ACTION_CHANNEL } from './types/channels/window';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -42,7 +43,7 @@ const createWindow = () => {
 app.whenReady().then(() => {
   createWindow();
 
-  ipcMain.on('window:action', (event, action) => {
+  ipcMain.on(WINDOW_ACTION_CHANNEL, (event, action) => {
     // TODO: implement minimize, maximize, and close
     console.log({ event, action });
   });
