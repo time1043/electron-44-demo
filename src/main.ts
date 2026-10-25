@@ -1,4 +1,10 @@
-import { app, BrowserWindow } from 'electron';
+import {
+  app,
+  BrowserWindow,
+  Menu,
+  MenuItemConstructorOptions,
+  shell,
+} from 'electron';
 import started from 'electron-squirrel-startup';
 import path from 'node:path';
 import { registerIpcHandlers } from './main/ipc-handlers';
@@ -44,6 +50,31 @@ app.whenReady().then(() => {
   createWindow();
 
   registerIpcHandlers();
+
+  // https://www.electronjs.org/docs/latest/tutorial/application-menu
+  // https://www.electronjs.org/docs/latest/tutorial/menus#default-menu-roles
+  const menuTemplate: MenuItemConstructorOptions[] = [
+    ...(process.platform === 'darwin'
+      ? ([{ role: 'appMenu' }] satisfies MenuItemConstructorOptions[])
+      : []),
+    { role: 'fileMenu' },
+    { role: 'editMenu' },
+    { role: 'viewMenu' },
+    { role: 'windowMenu' },
+    {
+      role: 'help',
+      submenu: [
+        {
+          label: 'Learn More',
+          click: async () => {
+            await shell.openExternal('https://github.com/time1043');
+          },
+        },
+      ],
+    },
+  ];
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
