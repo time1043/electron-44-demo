@@ -1,14 +1,8 @@
-import {
-  app,
-  BrowserWindow,
-  Menu,
-  MenuItem,
-  MenuItemConstructorOptions,
-  shell,
-} from 'electron';
+import { app, BrowserWindow } from 'electron';
 import started from 'electron-squirrel-startup';
 import path from 'node:path';
 import { registerIpcHandlers } from './main/ipc-handlers';
+import { registerMenus } from './main/menus';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -51,49 +45,7 @@ app.whenReady().then(() => {
   createWindow();
 
   registerIpcHandlers();
-
-  // https://www.electronjs.org/docs/latest/tutorial/application-menu
-  // https://www.electronjs.org/docs/latest/tutorial/menus#default-menu-roles
-
-  const alwaysOnTopMenuItem: MenuItemConstructorOptions = {
-    label: 'Always on Top',
-    type: 'checkbox',
-    click: (menuItem, window) => {
-      window?.setAlwaysOnTop(menuItem.checked);
-    },
-  };
-
-  // const currentAppMenu = Menu.getApplicationMenu();
-  const currentMenuItems =
-    Menu.getApplicationMenu()?.items.map((item: MenuItem) => {
-      if (item.role?.toLowerCase() === 'windowmenu') {
-        return new MenuItem({
-          role: 'windowMenu',
-          // submenu: [...item.submenu?.items],
-          submenu: Menu.buildFromTemplate([
-            alwaysOnTopMenuItem,
-            ...(item.submenu?.items || []),
-          ]),
-        });
-      } else {
-        return item;
-      }
-    }) || [];
-  const menuTemplate: MenuItemConstructorOptions[] = [
-    {
-      role: 'help',
-      submenu: [
-        {
-          label: 'Learn More',
-          click: async () => {
-            await shell.openExternal('https://github.com/time1043');
-          },
-        },
-      ],
-    },
-  ];
-  const menu = Menu.buildFromTemplate([...currentMenuItems, ...menuTemplate]);
-  Menu.setApplicationMenu(menu);
+  registerMenus();
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
