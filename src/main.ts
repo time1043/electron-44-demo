@@ -53,14 +53,9 @@ app.whenReady().then(() => {
 
   // https://www.electronjs.org/docs/latest/tutorial/application-menu
   // https://www.electronjs.org/docs/latest/tutorial/menus#default-menu-roles
+  // const currentAppMenu = Menu.getApplicationMenu();
+  const currentMenuItems = Menu.getApplicationMenu()?.items || [];
   const menuTemplate: MenuItemConstructorOptions[] = [
-    ...(process.platform === 'darwin'
-      ? ([{ role: 'appMenu' }] satisfies MenuItemConstructorOptions[])
-      : []),
-    { role: 'fileMenu' },
-    { role: 'editMenu' },
-    { role: 'viewMenu' },
-    { role: 'windowMenu' },
     {
       role: 'help',
       submenu: [
@@ -73,7 +68,7 @@ app.whenReady().then(() => {
       ],
     },
   ];
-  const menu = Menu.buildFromTemplate(menuTemplate);
+  const menu = Menu.buildFromTemplate([...currentMenuItems, ...menuTemplate]);
   Menu.setApplicationMenu(menu);
 
   // On OS X it's common to re-create a window in the app when the
