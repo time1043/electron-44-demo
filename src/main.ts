@@ -66,7 +66,7 @@ app.whenReady().then(() => {
   // const currentAppMenu = Menu.getApplicationMenu();
   const currentMenuItems =
     Menu.getApplicationMenu()?.items.map((item: MenuItem) => {
-      if (item.role === 'windowMenu') {
+      if (item.role?.toLowerCase() === 'windowmenu') {
         return new MenuItem({
           role: 'windowMenu',
           // submenu: [...item.submenu?.items],
