@@ -2,6 +2,7 @@ import {
   app,
   BrowserWindow,
   Menu,
+  MenuItem,
   MenuItemConstructorOptions,
   shell,
 } from 'electron';
@@ -53,8 +54,31 @@ app.whenReady().then(() => {
 
   // https://www.electronjs.org/docs/latest/tutorial/application-menu
   // https://www.electronjs.org/docs/latest/tutorial/menus#default-menu-roles
+
+  const alwaysOnTopMenuItem: MenuItemConstructorOptions = {
+    label: 'Always on Top',
+    type: 'checkbox',
+    click: (menuItem, window) => {
+      window?.setAlwaysOnTop(menuItem.checked);
+    },
+  };
+
   // const currentAppMenu = Menu.getApplicationMenu();
-  const currentMenuItems = Menu.getApplicationMenu()?.items || [];
+  const currentMenuItems =
+    Menu.getApplicationMenu()?.items.map((item: MenuItem) => {
+      if (item.role === 'windowMenu') {
+        return new MenuItem({
+          role: 'windowMenu',
+          // submenu: [...item.submenu?.items],
+          submenu: Menu.buildFromTemplate([
+            alwaysOnTopMenuItem,
+            ...(item.submenu?.items || []),
+          ]),
+        });
+      } else {
+        return item;
+      }
+    }) || [];
   const menuTemplate: MenuItemConstructorOptions[] = [
     {
       role: 'help',
