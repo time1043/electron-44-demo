@@ -1,10 +1,18 @@
 @import 'tailwindcss';
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes:
+    light --default,
+    dark --prefersdark;
+}
 
 nav {
   app-region: drag;
 }
 
 .btn {
+  app-region: no-drag;
+}
+
+label {
   app-region: no-drag;
 }
