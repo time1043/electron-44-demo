@@ -4,6 +4,7 @@ import {
   MenuItemConstructorOptions,
   nativeImage,
   shell,
+  app,
 } from 'electron';
 
 /**
@@ -19,7 +20,10 @@ export function registerApplicationMenu() {
     click: (menuItem, window) => {
       window?.setAlwaysOnTop(menuItem.checked);
     },
-    icon: nativeImage.createMenuSymbol('pin'),
+    icon:
+      process.platform === 'darwin'
+        ? nativeImage.createMenuSymbol('pin')
+        : nativeImage.createFromPath(`${app.getAppPath()}/assets/pin.png`),
   };
 
   // const currentAppMenu = Menu.getApplicationMenu();
