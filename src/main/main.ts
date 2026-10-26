@@ -1,8 +1,8 @@
 import { app, BrowserWindow } from 'electron'
 import started from 'electron-squirrel-startup'
-import { registerIpcHandlers } from './main/ipc-handlers'
-import { registerMenus } from './main/menus'
-import { createMainWindow } from './main/windows/main-window'
+import { registerIpcHandlers } from './ipc-handlers'
+import { registerMenus } from './menus'
+import { createMainWindow } from './windows/main-window'
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
