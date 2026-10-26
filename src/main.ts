@@ -1,48 +1,19 @@
 import { app, BrowserWindow } from 'electron'
 import started from 'electron-squirrel-startup'
-import path from 'node:path'
 import { registerIpcHandlers } from './main/ipc-handlers'
 import { registerMenus } from './main/menus'
+import { createMainWindow } from './main/windows/main-window'
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
   app.quit()
 }
 
-const createWindow = () => {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.cjs'),
-    },
-    show: false,
-    frame: false,
-  })
-
-  // and load the index.html of the app.
-  if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
-    mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL)
-  } else {
-    mainWindow.loadFile(
-      path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`),
-    )
-  }
-
-  mainWindow.once('ready-to-show', () => {
-    mainWindow.show()
-  })
-
-  // // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
-}
-
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  createWindow()
+  createMainWindow()
 
   registerIpcHandlers()
   registerMenus()
@@ -51,7 +22,7 @@ app.whenReady().then(() => {
   // dock icon is clicked and there are no other windows open.
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow()
+      createMainWindow()
     }
   })
 })
