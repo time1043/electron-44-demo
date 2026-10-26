@@ -1,6 +1,6 @@
 {
-  "name": "electron-demo",
-  "productName": "electron-demo",
+  "name": "sync-paste",
+  "productName": "SyncPaste",
   "version": "1.0.0",
   "private": true,
   "description": "My Electron application description",

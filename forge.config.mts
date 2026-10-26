@@ -10,6 +10,8 @@ import { FuseV1Options, FuseVersion } from '@electron/fuses';
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
+    // it takes effect only the packaging stage instead of the development stage
+    icon: `${import.meta.dirname}/assets/app`,
   },
   rebuildConfig: {},
   makers: [
