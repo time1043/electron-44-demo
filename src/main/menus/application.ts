@@ -7,6 +7,32 @@ import {
 } from 'electron'
 import { assetPath } from '../assets'
 
+const alwaysOnTopMenuItem: MenuItemConstructorOptions = {
+  label: 'Always on Top',
+  type: 'checkbox',
+  click: (menuItem, window) => {
+    window?.setAlwaysOnTop(menuItem.checked)
+  },
+  icon:
+    process.platform === 'darwin'
+      ? nativeImage.createMenuSymbol('pin')
+      : nativeImage.createFromPath(assetPath('pin.png')),
+}
+
+const menuTemplate: MenuItemConstructorOptions[] = [
+  {
+    role: 'help',
+    submenu: [
+      {
+        label: 'Learn More',
+        click: async () => {
+          await shell.openExternal('https://github.com/time1043')
+        },
+      },
+    ],
+  },
+]
+
 /**
  * Customize the application menu (the top menu bar).
  *
@@ -14,18 +40,6 @@ import { assetPath } from '../assets'
  * https://www.electronjs.org/docs/latest/tutorial/menus#default-menu-roles
  */
 export function registerApplicationMenu() {
-  const alwaysOnTopMenuItem: MenuItemConstructorOptions = {
-    label: 'Always on Top',
-    type: 'checkbox',
-    click: (menuItem, window) => {
-      window?.setAlwaysOnTop(menuItem.checked)
-    },
-    icon:
-      process.platform === 'darwin'
-        ? nativeImage.createMenuSymbol('pin')
-        : nativeImage.createFromPath(assetPath('pin.png')),
-  }
-
   // const currentAppMenu = Menu.getApplicationMenu();
   const currentMenuItems =
     Menu.getApplicationMenu()?.items.map((item: MenuItem) => {
@@ -42,19 +56,6 @@ export function registerApplicationMenu() {
         return item
       }
     }) || []
-  const menuTemplate: MenuItemConstructorOptions[] = [
-    {
-      role: 'help',
-      submenu: [
-        {
-          label: 'Learn More',
-          click: async () => {
-            await shell.openExternal('https://github.com/time1043')
-          },
-        },
-      ],
-    },
-  ]
   const menu = Menu.buildFromTemplate([...currentMenuItems, ...menuTemplate])
   Menu.setApplicationMenu(menu)
 }
