@@ -1,7 +1,6 @@
-import { app, BrowserWindow, Menu, nativeImage, Tray } from 'electron'
+import { app, BrowserWindow } from 'electron'
 import started from 'electron-squirrel-startup'
 import path from 'node:path'
-import { assetPath } from './main/assets'
 import { registerIpcHandlers } from './main/ipc-handlers'
 import { registerMenus } from './main/menus'
 
@@ -39,9 +38,6 @@ const createWindow = () => {
   // mainWindow.webContents.openDevTools();
 }
 
-// save a reference to the Tray object globally to avoid garbage collection
-let tray
-
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -50,21 +46,6 @@ app.whenReady().then(() => {
 
   registerIpcHandlers()
   registerMenus()
-
-  const trayLogo = nativeImage.createFromPath(assetPath('tray.png'))
-  if (trayLogo.isEmpty()) {
-    console.warn(
-      `[tray] failed to load tray icon from ${assetPath('tray.png')}`,
-    )
-  }
-  if (process.platform === 'darwin') {
-    trayLogo.setTemplateImage(true)
-  }
-
-  // The Tray can only be instantiated after the 'ready' event is fired
-  tray = new Tray(trayLogo)
-  const contextMenu = Menu.buildFromTemplate([{ role: 'quit' }])
-  tray.setContextMenu(contextMenu)
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
