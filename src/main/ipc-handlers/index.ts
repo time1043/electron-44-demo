@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron';
-import { WINDOW_ACTION_CHANNEL } from '../../types/channels/window';
 import { handleWindowAction } from './window';
+import { WINDOW_ACTION_CHANNEL } from '@/types/channels/window';
 
 /**
  * Register all main-process IPC handlers.

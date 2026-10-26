@@ -1,9 +1,9 @@
+import { WindowAction } from '@/types/window-action';
 import {
   MinusSquareIcon,
   ResizeIcon,
   XSquareIcon,
 } from '@phosphor-icons/react';
-import { WindowAction } from '../types/window-action';
 
 export default function NavBar() {
   const { windowAction } = window.electronAPI;

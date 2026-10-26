@@ -1,6 +1,6 @@
+import BreakpointIndicator from '@/ui/breakpoint-indicator';
+import NavBar from '@/ui/nav-bar';
 import { ReactNode } from 'react';
-import NavBar from '../ui/nav-bar';
-import BreakpointIndicator from '../ui/breakpoint-indicator';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (

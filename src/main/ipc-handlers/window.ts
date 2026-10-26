@@ -1,5 +1,5 @@
+import { WindowAction } from '@/types/window-action';
 import { BrowserWindow, dialog, IpcMainEvent } from 'electron';
-import { WindowAction } from '../../types/window-action';
 
 export function handleWindowAction(event: IpcMainEvent, action: WindowAction) {
   // Get window from event sender
