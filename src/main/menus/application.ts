@@ -4,8 +4,8 @@ import {
   MenuItemConstructorOptions,
   nativeImage,
   shell,
-} from 'electron';
-import { assetPath } from '../assets';
+} from 'electron'
+import { assetPath } from '../assets'
 
 /**
  * Customize the application menu (the top menu bar).
@@ -18,13 +18,13 @@ export function registerApplicationMenu() {
     label: 'Always on Top',
     type: 'checkbox',
     click: (menuItem, window) => {
-      window?.setAlwaysOnTop(menuItem.checked);
+      window?.setAlwaysOnTop(menuItem.checked)
     },
     icon:
       process.platform === 'darwin'
         ? nativeImage.createMenuSymbol('pin')
         : nativeImage.createFromPath(assetPath('pin.png')),
-  };
+  }
 
   // const currentAppMenu = Menu.getApplicationMenu();
   const currentMenuItems =
@@ -37,11 +37,11 @@ export function registerApplicationMenu() {
             alwaysOnTopMenuItem,
             ...(item.submenu?.items || []),
           ]),
-        });
+        })
       } else {
-        return item;
+        return item
       }
-    }) || [];
+    }) || []
   const menuTemplate: MenuItemConstructorOptions[] = [
     {
       role: 'help',
@@ -49,12 +49,12 @@ export function registerApplicationMenu() {
         {
           label: 'Learn More',
           click: async () => {
-            await shell.openExternal('https://github.com/time1043');
+            await shell.openExternal('https://github.com/time1043')
           },
         },
       ],
     },
-  ];
-  const menu = Menu.buildFromTemplate([...currentMenuItems, ...menuTemplate]);
-  Menu.setApplicationMenu(menu);
+  ]
+  const menu = Menu.buildFromTemplate([...currentMenuItems, ...menuTemplate])
+  Menu.setApplicationMenu(menu)
 }

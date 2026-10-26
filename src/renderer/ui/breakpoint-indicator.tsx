@@ -7,5 +7,5 @@ export default function BreakpointIndicator() {
       <span className="hidden lg:inline xl:hidden">lg</span>
       <span className="hidden xl:inline">xl</span>
     </div>
-  );
+  )
 }

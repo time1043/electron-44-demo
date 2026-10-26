@@ -1,1 +1,1 @@
-export const WINDOW_ACTION_CHANNEL = 'window:action';
+export const WINDOW_ACTION_CHANNEL = 'window:action'

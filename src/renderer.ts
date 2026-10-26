@@ -12,9 +12,9 @@
  * https://electronjs.org/docs/tutorial/security
  */
 
-import './renderer/app';
-import './renderer/index.css';
+import './renderer/app'
+import './renderer/index.css'
 
 console.log(
   '👋 This message is being logged by the renderer process, included via Vite',
-);
+)

@@ -1,12 +1,8 @@
-import { WindowAction } from '@/types/window-action';
-import {
-  MinusSquareIcon,
-  ResizeIcon,
-  XSquareIcon,
-} from '@phosphor-icons/react';
+import { WindowAction } from '@/types/window-action'
+import { MinusSquareIcon, ResizeIcon, XSquareIcon } from '@phosphor-icons/react'
 
 export default function NavBar() {
-  const { windowAction } = window.electronAPI;
+  const { windowAction } = window.electronAPI
 
   return (
     <nav className="navbar bg-base-100 shadow-sm sm:p-2 sm:min-h-4 p-1 min-h-2">
@@ -37,5 +33,5 @@ export default function NavBar() {
         </button>
       </div>
     </nav>
-  );
+  )
 }

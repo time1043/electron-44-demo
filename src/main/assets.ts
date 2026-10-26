@@ -1,5 +1,5 @@
-import { app } from 'electron';
-import path from 'node:path';
+import { app } from 'electron'
+import path from 'node:path'
 
 /**
  * Resolve a file inside the project's `assets/` folder.
@@ -25,7 +25,7 @@ export function assetPath(...segments: string[]): string {
 
   const baseDir = app.isPackaged
     ? path.join(process.resourcesPath, 'assets')
-    : path.join(app.getAppPath(), 'assets');
+    : path.join(app.getAppPath(), 'assets')
 
-  return path.join(baseDir, ...segments);
+  return path.join(baseDir, ...segments)
 }

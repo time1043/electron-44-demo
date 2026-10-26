@@ -1,16 +1,16 @@
 /// <reference types="@electron-forge/plugin-vite/forge-vite-env" />
 /// <reference types="vite/client" />
 
-import { WindowAction } from './types/window-action';
+import { WindowAction } from './types/window-action'
 
-declare module '*.css';
+declare module '*.css'
 
 export interface IElectronAPI {
-  windowAction: (action: WindowAction) => void; // ipcRenderer(): void
+  windowAction: (action: WindowAction) => void // ipcRenderer(): void
 }
 
 declare global {
   interface Window {
-    electronAPI: IElectronAPI;
+    electronAPI: IElectronAPI
   }
 }
