@@ -4,8 +4,8 @@ import {
   MenuItemConstructorOptions,
   nativeImage,
   shell,
-  app,
 } from 'electron';
+import { assetPath } from '../assets';
 
 /**
  * Customize the application menu (the top menu bar).
@@ -23,7 +23,7 @@ export function registerApplicationMenu() {
     icon:
       process.platform === 'darwin'
         ? nativeImage.createMenuSymbol('pin')
-        : nativeImage.createFromPath(`${app.getAppPath()}/assets/pin.png`),
+        : nativeImage.createFromPath(assetPath('pin.png')),
   };
 
   // const currentAppMenu = Menu.getApplicationMenu();

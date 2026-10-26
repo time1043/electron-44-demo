@@ -12,6 +12,10 @@ const config: ForgeConfig = {
     asar: true,
     // it takes effect only the packaging stage instead of the development stage
     icon: `${import.meta.dirname}/assets/app`,
+    // the Vite plugin only packs `.vite` into the asar, so runtime assets
+    // (tray / menu icons) have to be shipped next to it, see src/main/assets.ts
+    // out/SyncPaste-darwin-arm64/SyncPaste.app/Contents/Resources/assets
+    extraResource: [`${import.meta.dirname}/assets`],
   },
   rebuildConfig: {},
   makers: [

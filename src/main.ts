@@ -1,6 +1,7 @@
 import { app, BrowserWindow, Menu, nativeImage, Tray } from 'electron';
 import started from 'electron-squirrel-startup';
 import path from 'node:path';
+import { assetPath } from './main/assets';
 import { registerIpcHandlers } from './main/ipc-handlers';
 import { registerMenus } from './main/menus';
 
@@ -50,11 +51,14 @@ app.whenReady().then(() => {
   registerIpcHandlers();
   registerMenus();
 
-  const trayLogo = nativeImage.createFromPath(
-    `${app.getAppPath()}/assets/tray.png`,
-  );
+  const trayLogo = nativeImage.createFromPath(assetPath('tray.png'));
+  if (trayLogo.isEmpty()) {
+    console.warn(
+      `[tray] failed to load tray icon from ${assetPath('tray.png')}`,
+    );
+  }
   if (process.platform === 'darwin') {
-    logo.setTemplateImage(true);
+    trayLogo.setTemplateImage(true);
   }
 
   // The Tray can only be instantiated after the 'ready' event is fired
