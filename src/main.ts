@@ -53,6 +53,9 @@ app.whenReady().then(() => {
   const trayLogo = nativeImage.createFromPath(
     `${app.getAppPath()}/assets/tray.png`,
   );
+  if (process.platform === 'darwin') {
+    logo.setTemplateImage(true);
+  }
 
   // The Tray can only be instantiated after the 'ready' event is fired
   tray = new Tray(trayLogo);
