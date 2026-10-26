@@ -1,4 +1,10 @@
-import { Menu, MenuItem, MenuItemConstructorOptions, shell } from 'electron';
+import {
+  Menu,
+  MenuItem,
+  MenuItemConstructorOptions,
+  nativeImage,
+  shell,
+} from 'electron';
 
 /**
  * Customize the application menu (the top menu bar).
@@ -13,6 +19,7 @@ export function registerApplicationMenu() {
     click: (menuItem, window) => {
       window?.setAlwaysOnTop(menuItem.checked);
     },
+    icon: nativeImage.createMenuSymbol('pin'),
   };
 
   // const currentAppMenu = Menu.getApplicationMenu();
