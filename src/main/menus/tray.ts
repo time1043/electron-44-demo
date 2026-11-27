@@ -37,8 +37,23 @@ export function registerTray(): Tray {
 
   tray = new Tray(trayLogo)
 
-  const contextMenuTemplate: MenuItemConstructorOptions[] = [{ role: 'quit' }]
-  tray.setContextMenu(Menu.buildFromTemplate(contextMenuTemplate))
+  const contextMenuTemplate: MenuItemConstructorOptions[] = [
+    { role: 'quit' },
+    { role: 'about' },
+    {
+      label: 'settings',
+      icon: nativeImage.createMenuSymbol('gear'),
+      click: () => {
+        // TODO: click to open settings windows
+      },
+    },
+  ]
+  const contextMenu = Menu.buildFromTemplate(contextMenuTemplate)
+  // Only show the context menu on right-click, not on left-click.
+  // tray.setContextMenu(contextMenu)
+  tray.on('right-click', () => {
+    tray?.popUpContextMenu(contextMenu)
+  })
 
   return tray
 }
