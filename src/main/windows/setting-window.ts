@@ -2,9 +2,16 @@ import { BrowserWindow } from 'electron'
 import path from 'node:path'
 import { loadWindow } from '../utils/load-window'
 
+let settingWindow: BrowserWindow
+
 export function createSettingWindow() {
+  if (settingWindow) {
+    settingWindow.show()
+    return
+  }
+
   // Create the browser window.
-  const settingWindow = new BrowserWindow({
+  settingWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
