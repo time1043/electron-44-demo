@@ -1,8 +1,11 @@
+import { ClipboardWatcherJs, startWatch } from '@crosscopy/clipboard'
 import { app, BrowserWindow } from 'electron'
 import started from 'electron-squirrel-startup'
 import { registerIpcHandlers } from './ipc-handlers'
 import { registerMenus } from './menus'
 import { createMainWindow } from './windows/main-window'
+
+let watcher: ClipboardWatcherJs
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -18,6 +21,10 @@ app.whenReady().then(() => {
   registerIpcHandlers()
   registerMenus()
 
+  watcher = startWatch(() => {
+    console.log('clipboard changed!')
+  })
+
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   app.on('activate', () => {
@@ -32,6 +39,7 @@ app.whenReady().then(() => {
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
+    watcher.stop()
     app.quit()
   }
 })
