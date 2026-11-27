@@ -6,8 +6,7 @@ let settingWindow: BrowserWindow
 
 export function createSettingWindow() {
   if (settingWindow) {
-    settingWindow.show()
-    return
+    return settingWindow
   }
 
   // Create the browser window.
@@ -29,4 +28,6 @@ export function createSettingWindow() {
 
   // // Open the DevTools.
   // mainWindow.webContents.openDevTools();
+
+  return settingWindow
 }

@@ -45,7 +45,10 @@ export function registerTray(): Tray {
       label: 'settings',
       icon: nativeImage.createMenuSymbol('gear'),
       click: () => {
-        createSettingWindow()
+        const settingWindow = createSettingWindow()
+        if (settingWindow.isVisible()) {
+          settingWindow.show()
+        }
       },
     },
   ]

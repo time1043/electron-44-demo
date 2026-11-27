@@ -6,8 +6,7 @@ let mainWindow: BrowserWindow
 
 export function createMainWindow() {
   if (mainWindow) {
-    mainWindow.show()
-    return
+    return mainWindow
   }
 
   // Create the browser window.
@@ -30,4 +29,6 @@ export function createMainWindow() {
 
   // // Open the DevTools.
   // mainWindow.webContents.openDevTools();
+
+  return mainWindow
 }
