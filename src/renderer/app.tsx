@@ -1,12 +1,6 @@
 import { createRoot } from 'react-dom/client'
-import { lazy } from 'react'
-
-// lazy loading
-const Home = lazy(() => import('./pages/home/index'))
-const Setting = lazy(() => import('./pages/setting/index'))
-
-const hashPath = window.location.hash.slice(1)
-const Page = hashPath === 'home' ? Home : Setting
+import { RouterProvider } from 'react-router'
+import { router } from './router'
 
 const root = createRoot(document.body)
-root.render(<Page />)
+root.render(<RouterProvider router={router} />)
