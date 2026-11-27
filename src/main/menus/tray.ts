@@ -1,5 +1,6 @@
 import { Menu, MenuItemConstructorOptions, nativeImage, Tray } from 'electron'
 import { assetPath } from '../assets'
+import { createSettingWindow } from '../windows/setting-window'
 
 // Keep a module-level reference to the Tray object, otherwise it would be
 // garbage collected and the icon would disappear.
@@ -44,7 +45,7 @@ export function registerTray(): Tray {
       label: 'settings',
       icon: nativeImage.createMenuSymbol('gear'),
       click: () => {
-        // TODO: click to open settings windows
+        createSettingWindow()
       },
     },
   ]
