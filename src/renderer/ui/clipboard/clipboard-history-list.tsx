@@ -1,11 +1,14 @@
+import { TrashIcon } from '@phosphor-icons/react'
 import { ClipboardHistory } from '@/types/clipboard-history'
 
 type ClipboardHistoryListProps = {
   clipboardHistoryList: ClipboardHistory[]
+  onDeleteHistory: (historyId: number) => void
 }
 
 export default function ClipboardHistoryList({
   clipboardHistoryList,
+  onDeleteHistory,
 }: ClipboardHistoryListProps) {
   return (
     <ul className="list bg-base-100 rounded-box shadow-md">
@@ -14,7 +17,11 @@ export default function ClipboardHistoryList({
       </li>
 
       {clipboardHistoryList.map((item) => (
-        <ClipboardHistoryListItem key={item.id} clipboardHistory={item} />
+        <ClipboardHistoryListItem
+          key={item.id}
+          clipboardHistory={item}
+          onDeleteHistory={onDeleteHistory}
+        />
       ))}
     </ul>
   )
@@ -22,10 +29,12 @@ export default function ClipboardHistoryList({
 
 type ClipboardHistoryListItemProps = {
   clipboardHistory: ClipboardHistory
+  onDeleteHistory: (historyId: number) => void
 }
 
 function ClipboardHistoryListItem({
   clipboardHistory,
+  onDeleteHistory,
 }: ClipboardHistoryListItemProps) {
   const content =
     clipboardHistory.content.length > 50
@@ -58,6 +67,13 @@ function ClipboardHistoryListItem({
             <path d="M6 3L20 12 6 21 6 3z"></path>
           </g>
         </svg>
+      </button>
+      <button
+        aria-label="Delete"
+        className="btn btn-square btn-ghost hover:bg-red-500"
+        onClick={() => onDeleteHistory(clipboardHistory.id)}
+      >
+        <TrashIcon className="size-[1.2em]" />
       </button>
     </li>
   )
