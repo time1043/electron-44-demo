@@ -1,15 +1,13 @@
-import { ClipboardAction } from '@/types/clipboard-action'
-import { ClipboardHistory } from '@/types/clipboard-history'
-import { useEffect, useState } from 'react'
-import RootLayout from './root-layout'
 import ClipboardHistoryList from '@/renderer/ui/clipboard/clipboard-history-list'
+import { ClipboardAction } from '@/types/clipboard-action'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import RootLayout from './root-layout'
 
 const { clipboardAction } = window.electronAPI
+const CLIPBOARD_HISTORIES_KEY = ['clipboard-histories'] as const
 
 export default function Home() {
-  const [clipboardHistoryList, setClipboardHistoryList] = useState<
-    ClipboardHistory[]
-  >([])
+  const queryClient = useQueryClient()
 
   async function loadClipboardHistory() {
     const clipboardHistoryList = await clipboardAction(
@@ -17,25 +15,26 @@ export default function Home() {
     )
 
     if (Array.isArray(clipboardHistoryList)) {
-      setClipboardHistoryList(clipboardHistoryList)
+      return clipboardHistoryList
     }
   }
 
-  useEffect(() => {
-    loadClipboardHistory()
-  }, [])
+  const { data: clipboardHistoryList } = useQuery({
+    queryKey: CLIPBOARD_HISTORIES_KEY,
+    queryFn: loadClipboardHistory,
+  })
 
   async function deleteClipboardHistory(id: number) {
     const deleted = await clipboardAction(ClipboardAction.DELETE_HISTORY, id)
     if (deleted) {
-      await loadClipboardHistory()
+      queryClient.invalidateQueries({ queryKey: CLIPBOARD_HISTORIES_KEY })
     }
   }
 
   return (
     <RootLayout>
       <ClipboardHistoryList
-        clipboardHistoryList={clipboardHistoryList}
+        clipboardHistoryList={clipboardHistoryList ?? []}
         onDeleteHistory={deleteClipboardHistory}
       />
     </RootLayout>
