@@ -1,5 +1,5 @@
 import { ClipboardAction } from '@/types/clipboard-action'
-import { clipboardHistory } from '@/types/clipboard-history'
+import { ClipboardHistory } from '@/types/clipboard-history'
 import { IpcMainInvokeEvent } from 'electron'
 import { queryClipboardHistory } from '../db/clipboard'
 import { stopMonitor } from '../utils/clipboard-history'
@@ -14,7 +14,7 @@ export function handleClipboardAction(
 
   if (action === ClipboardAction.GET_HISTORIES) {
     const clipboardHistoryList =
-      queryClipboardHistory.all() as clipboardHistory[]
+      queryClipboardHistory.all() as ClipboardHistory[]
     return clipboardHistoryList
   }
 }
