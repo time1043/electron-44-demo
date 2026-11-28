@@ -1,4 +1,4 @@
-import { ClipboardWatcherJs, startWatch } from '@crosscopy/clipboard'
+import { ClipboardWatcherJs, getText, startWatch } from '@crosscopy/clipboard'
 import { app, BrowserWindow } from 'electron'
 import started from 'electron-squirrel-startup'
 import { registerIpcHandlers } from './ipc-handlers'
@@ -21,8 +21,11 @@ app.whenReady().then(() => {
   registerIpcHandlers()
   registerMenus()
 
-  watcher = startWatch(() => {
+  watcher = startWatch(async () => {
     console.log('clipboard changed!')
+
+    const text = await getText()
+    console.log({ text })
   })
 
   // On OS X it's common to re-create a window in the app when the
