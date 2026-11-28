@@ -11,7 +11,8 @@ export interface IElectronAPI {
   windowAction: (action: WindowAction) => void // ipcRenderer(): void
   clipboardAction: (
     action: ClipboardAction,
-  ) => Promise<void | ClipboardHistory[]>
+    historyId?: number,
+  ) => Promise<void | ClipboardHistory[] | boolean>
 }
 
 declare global {
