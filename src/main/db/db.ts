@@ -1,6 +1,12 @@
+import { app } from 'electron'
+import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 
-export const database = new DatabaseSync(':memory:')
+const userDataDir = app.getPath('userData')
+
+export const database = new DatabaseSync(
+  path.join(userDataDir, 'sync-paste.db'),
+)
 
 database.exec(`
   CREATE TABLE IF NOT EXISTS clipboard_history (
