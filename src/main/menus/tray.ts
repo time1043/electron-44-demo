@@ -1,5 +1,6 @@
 import { Menu, MenuItemConstructorOptions, nativeImage, Tray } from 'electron'
 import { assetPath } from '../assets'
+import { createSettingWindow } from '../windows/setting-window'
 
 // Keep a module-level reference to the Tray object, otherwise it would be
 // garbage collected and the icon would disappear.
@@ -37,8 +38,26 @@ export function registerTray(): Tray {
 
   tray = new Tray(trayLogo)
 
-  const contextMenuTemplate: MenuItemConstructorOptions[] = [{ role: 'quit' }]
-  tray.setContextMenu(Menu.buildFromTemplate(contextMenuTemplate))
+  const contextMenuTemplate: MenuItemConstructorOptions[] = [
+    { role: 'quit' },
+    { role: 'about' },
+    {
+      label: 'settings',
+      icon: nativeImage.createMenuSymbol('gear'),
+      click: () => {
+        const settingWindow = createSettingWindow()
+        if (settingWindow.isVisible()) {
+          settingWindow.show()
+        }
+      },
+    },
+  ]
+  const contextMenu = Menu.buildFromTemplate(contextMenuTemplate)
+  // Only show the context menu on right-click, not on left-click.
+  // tray.setContextMenu(contextMenu)
+  tray.on('right-click', () => {
+    tray?.popUpContextMenu(contextMenu)
+  })
 
   return tray
 }
