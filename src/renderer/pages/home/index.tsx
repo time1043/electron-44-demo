@@ -1,6 +1,6 @@
 import ClipboardHistoryList from '@/renderer/ui/clipboard/clipboard-history-list'
 import { ClipboardAction } from '@/types/clipboard-action'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import RootLayout from './root-layout'
 
 const { clipboardAction } = window.electronAPI
@@ -25,17 +25,24 @@ export default function Home() {
   })
 
   async function deleteClipboardHistory(id: number) {
-    const deleted = await clipboardAction(ClipboardAction.DELETE_HISTORY, id)
-    if (deleted) {
-      queryClient.invalidateQueries({ queryKey: CLIPBOARD_HISTORIES_KEY })
-    }
+    return await clipboardAction(ClipboardAction.DELETE_HISTORY, id)
   }
+
+  const deleteHistoryMutation = useMutation({
+    mutationFn: deleteClipboardHistory,
+    // Invalidating the query key re-fetches the list, no manual reload needed.
+    onSuccess: (deleted) => {
+      if (deleted) {
+        queryClient.invalidateQueries({ queryKey: CLIPBOARD_HISTORIES_KEY })
+      }
+    },
+  })
 
   return (
     <RootLayout>
       <ClipboardHistoryList
         clipboardHistoryList={clipboardHistoryList ?? []}
-        onDeleteHistory={deleteClipboardHistory}
+        onDeleteHistory={(historyId) => deleteHistoryMutation.mutate(historyId)}
       />
     </RootLayout>
   )
