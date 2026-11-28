@@ -1,5 +1,6 @@
 import { Menu, MenuItemConstructorOptions, nativeImage, Tray } from 'electron'
 import { assetPath } from '../assets'
+import { createMainWindow } from '../windows/main-window'
 import { createSettingWindow } from '../windows/setting-window'
 
 // Keep a module-level reference to the Tray object, otherwise it would be
@@ -57,6 +58,12 @@ export function registerTray(): Tray {
   // tray.setContextMenu(contextMenu)
   tray.on('right-click', () => {
     tray?.popUpContextMenu(contextMenu)
+  })
+
+  // Left-click toggles the main window, the usual interaction for tray apps.
+  tray.on('click', () => {
+    const mainWindow = createMainWindow()
+    mainWindow.show()
   })
 
   return tray
