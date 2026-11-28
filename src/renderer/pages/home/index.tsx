@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import RootLayout from './root-layout'
 import ClipboardHistoryList from '@/renderer/ui/clipboard/clipboard-history-list'
 
-const { clipboardAction } = window.electronAPI
+const { clipboardAction, onClipboardChanged } = window.electronAPI
 
 export default function Home() {
   const [clipboardHistoryList, setClipboardHistoryList] = useState<
@@ -23,6 +23,13 @@ export default function Home() {
 
   useEffect(() => {
     loadClipboardHistory()
+
+    // Main process pushes on every clipboard change; refetch on each signal.
+    const unsubscribe = onClipboardChanged(() => {
+      loadClipboardHistory()
+    })
+
+    return unsubscribe
   }, [])
 
   async function deleteClipboardHistory(id: number) {

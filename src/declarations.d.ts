@@ -13,6 +13,7 @@ export interface IElectronAPI {
     action: ClipboardAction,
     historyId?: number,
   ) => Promise<void | ClipboardHistory[] | boolean>
+  onClipboardChanged: (callback: () => void) => () => void
 }
 
 declare global {
