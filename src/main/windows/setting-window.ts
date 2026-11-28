@@ -2,15 +2,17 @@ import { BrowserWindow } from 'electron'
 import path from 'node:path'
 import { loadWindow } from '../utils/load-window'
 
-let settingWindow: BrowserWindow
+let settingWindow: BrowserWindow | undefined
 
 export function createSettingWindow() {
-  if (settingWindow) {
+  // A closed window is destroyed but stays truthy, so also check for that
+  // and recreate; otherwise using it throws `Object has been destroyed`.
+  if (settingWindow && !settingWindow.isDestroyed()) {
     return settingWindow
   }
 
   // Create the browser window.
-  settingWindow = new BrowserWindow({
+  const window = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -18,16 +20,17 @@ export function createSettingWindow() {
     },
     show: false,
   })
+  settingWindow = window
 
   // and load the index.html of the app.
-  loadWindow(settingWindow, 'setting')
+  loadWindow(window, 'setting')
 
-  settingWindow.once('ready-to-show', () => {
-    settingWindow.show()
+  window.once('ready-to-show', () => {
+    window.show()
   })
 
   // // Open the DevTools.
   // mainWindow.webContents.openDevTools();
 
-  return settingWindow
+  return window
 }

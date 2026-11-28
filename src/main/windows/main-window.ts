@@ -2,15 +2,17 @@ import { BrowserWindow } from 'electron'
 import path from 'node:path'
 import { loadWindow } from '../utils/load-window'
 
-let mainWindow: BrowserWindow
+let mainWindow: BrowserWindow | undefined
 
 export function createMainWindow() {
-  if (mainWindow) {
+  // A closed window is destroyed but stays truthy, so also check for that
+  // and recreate; otherwise using it throws `Object has been destroyed`.
+  if (mainWindow && !mainWindow.isDestroyed()) {
     return mainWindow
   }
 
   // Create the browser window.
-  mainWindow = new BrowserWindow({
+  const window = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -19,16 +21,17 @@ export function createMainWindow() {
     show: false,
     frame: false,
   })
+  mainWindow = window
 
   // and load the index.html of the app.
-  loadWindow(mainWindow, 'home')
+  loadWindow(window, 'home')
 
-  mainWindow.once('ready-to-show', () => {
-    mainWindow.show()
+  window.once('ready-to-show', () => {
+    window.show()
   })
 
   // // Open the DevTools.
   // mainWindow.webContents.openDevTools();
 
-  return mainWindow
+  return window
 }
