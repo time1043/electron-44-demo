@@ -27,10 +27,15 @@ type ClipboardHistoryListItemProps = {
 function ClipboardHistoryListItem({
   clipboardHistory,
 }: ClipboardHistoryListItemProps) {
+  const content =
+    clipboardHistory.content.length > 50
+      ? clipboardHistory.content.slice(0, 50) + '...'
+      : clipboardHistory.content
+
   return (
     <li className="list-row">
       <div className="list-col-grow">
-        <div>{clipboardHistory.content}</div>
+        <div>{content}</div>
         <div className="text-xs uppercase font-semibold opacity-60">
           {clipboardHistory.id} -{' '}
           {parseAndDisplayDateTime(clipboardHistory.created_at)}
