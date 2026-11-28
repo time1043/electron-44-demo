@@ -63,6 +63,12 @@ export function registerTray(): Tray {
   // Left-click toggles the main window, the usual interaction for tray apps.
   tray.on('click', () => {
     const mainWindow = createMainWindow()
+
+    if (mainWindow.isVisible()) {
+      mainWindow.hide()
+      return
+    }
+
     mainWindow.show()
   })
 
