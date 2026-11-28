@@ -8,4 +8,9 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  build: {
+    rolldownOptions: {
+      external: ['@crosscopy/clipboard', '@crosscopy/clipboard-darwin-arm64'],
+    },
+  },
 })

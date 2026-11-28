@@ -2,6 +2,7 @@ import { app, BrowserWindow } from 'electron'
 import started from 'electron-squirrel-startup'
 import { registerIpcHandlers } from './ipc-handlers'
 import { registerMenus } from './menus'
+import { startMonitor } from './utils/clipboard-history'
 import { createMainWindow } from './windows/main-window'
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -17,6 +18,8 @@ app.whenReady().then(() => {
 
   registerIpcHandlers()
   registerMenus()
+
+  startMonitor()
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.

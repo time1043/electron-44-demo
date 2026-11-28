@@ -1,6 +1,8 @@
-import { ipcMain } from 'electron'
-import { handleWindowAction } from './window'
+import { CLIPBOARD_ACTION_CHANNEL } from '@/types/channels/clipboard'
 import { WINDOW_ACTION_CHANNEL } from '@/types/channels/window'
+import { ipcMain } from 'electron'
+import { handleClipboardAction } from './clipboard'
+import { handleWindowAction } from './window'
 
 /**
  * Register all main-process IPC handlers.
@@ -8,4 +10,5 @@ import { WINDOW_ACTION_CHANNEL } from '@/types/channels/window'
  */
 export function registerIpcHandlers() {
   ipcMain.on(WINDOW_ACTION_CHANNEL, handleWindowAction)
+  ipcMain.handle(CLIPBOARD_ACTION_CHANNEL, handleClipboardAction)
 }
