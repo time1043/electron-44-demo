@@ -1,8 +1,9 @@
-import { ClipboardWatcherJs, getText, startWatch } from '@crosscopy/clipboard'
+import { ClipboardWatcherJs } from '@crosscopy/clipboard'
 import { app, BrowserWindow } from 'electron'
 import started from 'electron-squirrel-startup'
 import { registerIpcHandlers } from './ipc-handlers'
 import { registerMenus } from './menus'
+import { startMonitor } from './utils/clipboard-history'
 import { createMainWindow } from './windows/main-window'
 
 let watcher: ClipboardWatcherJs
@@ -21,12 +22,7 @@ app.whenReady().then(() => {
   registerIpcHandlers()
   registerMenus()
 
-  watcher = startWatch(async () => {
-    console.log('clipboard changed!')
-
-    const text = await getText()
-    console.log({ text })
-  })
+  watcher = startMonitor()
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
