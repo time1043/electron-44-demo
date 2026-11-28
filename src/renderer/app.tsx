@@ -9,7 +9,13 @@ const Setting = lazy(() => import('./pages/setting/index'))
 const hashPath = window.location.hash.slice(1)
 const Page = hashPath === 'home' ? Home : Setting
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: true,
+    },
+  },
+})
 
 const root = createRoot(document.body)
 root.render(
