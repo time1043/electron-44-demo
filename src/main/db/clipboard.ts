@@ -7,3 +7,7 @@ export const insertClipboardHistory = database.prepare(
 export const queryClipboardHistory = database.prepare(
   'SELECT * FROM clipboard_history ORDER BY created_at DESC',
 )
+
+export const deleteClipboardHistory = database.prepare(
+  'DELETE FROM clipboard_history WHERE id = ?',
+)
